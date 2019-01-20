@@ -1,0 +1,24 @@
+{
+  "name": "frontcamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N7IG/frontcamp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/N7IG/frontcamp/issues"
+  },
+  "homepage": "https://github.com/N7IG/frontcamp#readme"
+}
