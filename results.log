@@ -1,0 +1,4 @@
+{"message":"Hello world","level":"info","timestamp":"2019-01-20 20:52:12"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-01-20 20:56:16"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-01-20 20:56:27"}
+{"message":"URL: '/newsvas', DELETE request with parameter id = vas","level":"info","timestamp":"2019-01-20 20:56:51"}
