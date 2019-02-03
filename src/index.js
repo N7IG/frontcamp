@@ -1,110 +1,111 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const fs = require('fs');
 const app = express();
-const DB_PATH = "./database/db.json";
 const filename = "./results.log";
-const { createLogger, format, transports } = require('winston');
-const logger =  createLogger({
-    level: 'info',
+const { createLogger, format, transports } = require("winston");
+const mongoose = require("mongoose");
+const newsModel = require("../mongoose/news.model");
+const logger = createLogger({
+    level: "info",
     format: format.combine(
-      format.timestamp({
-        format: 'YYYY-MM-DD HH:mm:ss'
-      }),
-      format.json()
+        format.timestamp({
+            format: "YYYY-MM-DD HH:mm:ss"
+        }),
+        format.json()
     ),
     transports: [
-      new transports.Console({
-        level: 'info',
-        format: format.combine(
-          format.colorize(),
-          format.printf(
-            info => `${info.timestamp} ${info.level}: ${info.message}`
-          )
-        )
-      }),
-      new transports.File({ filename })
+        new transports.Console({
+            level: "info",
+            format: format.combine(
+                format.colorize(),
+                format.printf(
+                    info => `${info.timestamp} ${info.level}: ${info.message}`
+                )
+            )
+        }),
+        new transports.File({ filename })
     ]
-  });
+});
+
+mongoose.connect("mongodb://localhost/newsdb", { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get("/news", function(request, response){
+app.get("/news", function(request, response) {
     logger.info("URL: '/news', GET request");
-    fs.readFile(DB_PATH, 'utf8', (err, data) => {
+
+    newsModel.find({}).exec((err, news) => {
         if (err) {
-            throw err;
+            response.send("Error", err);
+        } else {
+            response.json(news);
         }
-        response.send(data);
-    })
+    });
 });
 
-app.get("/news/:id", function(request, response){
+app.get("/news/:id", function(request, response) {
     const id = request.params.id;
     logger.info(`URL: '/news${id}', GET request with parameter id = ${id}`);
 
-    fs.readFile(DB_PATH, 'utf8', (err, data) => {
+    newsModel.findOne({ _id: id }).exec((err, news) => {
         if (err) {
-            throw err;
+            response.send("Error", err);
+        } else {
+            response.json(news);
         }
-        const dataObject = JSON.parse(data);        
-        response.send(JSON.stringify(dataObject[id]));
-    })
+    });
 });
 
-app.put("/news/:id", function(request, response){
+app.put("/news/:id", function(request, response) {
     const id = request.params.id;
     logger.info(`URL: '/news${id}', PUT request with parameter id = ${id}`);
 
-    fs.readFile(DB_PATH, 'utf8', (err, data) => {
-        if (err) {
-            throw err;
-        }
-        const dataObject = JSON.parse(data);  
-        dataObject[id] = request.body;
-        fs.writeFile(DB_PATH, JSON.stringify(dataObject), (err, data, next) => {
-            if (err) {
-                next(err);
-            } else { 
-                response.send(dataObject);
+    newsModel.findOneAndUpdate(
+        { _id: id },
+        {
+            $set: {
+                title: request.body.title,
+                author: request.body.author,
+                category: request.body.category
             }
-        })
-    })
+        },
+        { upsert: true },
+        (err, news) => {
+            if (err) {
+                response.send("Error", err);
+            } else {
+                response.send(news);
+            }
+        }
+    );
 });
 
-app.post("/news", function(request, response){
+app.post("/news", function(request, response) {
     logger.info(`URL: '/news', PUT request`);
 
-    fs.writeFile(DB_PATH, JSON.stringify(request.body), (err, data, next) => {
+    newsModel.create(request.body, (err, news) => {
         if (err) {
-            next(err);
-        } else { 
-            response.send(request.body);
+            response.send("Error", err);
+        } else {
+            console.log(news);
+            response.send(news);
         }
-    })
+    });
 });
 
-app.delete("/news/:id", function(request, response){
-    const id = request.params.id;  
+app.delete("/news/:id", function(request, response) {
+    const id = request.params.id;
 
     logger.info(`URL: '/news${id}', DELETE request with parameter id = ${id}`);
-    
-    fs.readFile(DB_PATH, 'utf8', (err, data) => {
-        if (err) {
-            throw err;
-        }
-        const dataObject = JSON.parse(data);  
-        delete dataObject[id];
 
-        fs.writeFile(DB_PATH, JSON.stringify(dataObject), (err, data, next) => {
-            if (err) {
-                next(err);
-            } else { 
-                response.send(dataObject);
-            }
-        })
-    })
+    newsModel.findOneAndDelete({ _id: id }, (err, news) => {
+        if (err) {
+            response.send("Error", err);
+        } else {
+            response.send(news);
+        }
+    });
 });
 
 app.listen(3000);

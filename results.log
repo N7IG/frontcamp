@@ -2,3 +2,26 @@
 {"message":"URL: '/news', GET request","level":"info","timestamp":"2019-01-20 20:56:16"}
 {"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-01-20 20:56:27"}
 {"message":"URL: '/newsvas', DELETE request with parameter id = vas","level":"info","timestamp":"2019-01-20 20:56:51"}
+{"message":"URL: '/news3', GET request with parameter id = 3","level":"info","timestamp":"2019-02-03 23:18:21"}
+{"message":"URL: '/news3', GET request with parameter id = 3","level":"info","timestamp":"2019-02-03 23:21:40"}
+{"message":"URL: '/news3', GET request with parameter id = 3","level":"info","timestamp":"2019-02-03 23:29:38"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-03 23:29:57"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-03 23:33:13"}
+{"message":"URL: '/news3', GET request with parameter id = 3","level":"info","timestamp":"2019-02-03 23:33:17"}
+{"message":"URL: '/news3', GET request with parameter id = 3","level":"info","timestamp":"2019-02-03 23:33:24"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-03 23:33:29"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-03 23:36:11"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-03 23:41:21"}
+{"message":"URL: '/news2', GET request with parameter id = 2","level":"info","timestamp":"2019-02-03 23:41:34"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-03 23:42:20"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-03 23:46:11"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-03 23:46:15"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-03 23:47:57"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-03 23:48:01"}
+{"message":"URL: '/news2', PUT request with parameter id = 2","level":"info","timestamp":"2019-02-03 23:59:03"}
+{"message":"URL: '/news2', PUT request with parameter id = 2","level":"info","timestamp":"2019-02-03 23:59:33"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-04 00:01:39"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-04 00:01:41"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-04 00:02:21"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-04 00:05:14"}
+{"message":"URL: '/news5c5751f19f3f4d338c7a4141', GET request with parameter id = 5c5751f19f3f4d338c7a4141","level":"info","timestamp":"2019-02-04 00:05:28"}
