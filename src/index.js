@@ -4,7 +4,9 @@ const app = express();
 const filename = "./results.log";
 const { createLogger, format, transports } = require("winston");
 const mongoose = require("mongoose");
-const newsModel = require("../mongoose/news.model");
+const newsModel = require("../models/news.model");
+const userModel = require("../models/user.model");
+const passport = require("passport");
 const logger = createLogger({
     level: "info",
     format: format.combine(
@@ -28,9 +30,27 @@ const logger = createLogger({
 });
 
 mongoose.connect("mongodb://localhost/newsdb", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/userdb", { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("../passport.config")(passport);
+
+app.post("/register", function(request, response) {
+    logger.info(`URL: '/news', PUT request`);
+
+    userModel.create(request.body, (err, news) => {
+        if (err) {
+            response.send("Error", err);
+        } else {
+            console.log(news);
+            response.send(news);
+        }
+    });
+});
 
 app.get("/news", function(request, response) {
     logger.info("URL: '/news', GET request");
@@ -57,55 +77,90 @@ app.get("/news/:id", function(request, response) {
     });
 });
 
-app.put("/news/:id", function(request, response) {
-    const id = request.params.id;
-    logger.info(`URL: '/news${id}', PUT request with parameter id = ${id}`);
+app.put(
+    "/news/:id",
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/login"
+    }),
+    function(request, response) {
+        const id = request.params.id;
+        logger.info(`URL: '/news${id}', PUT request with parameter id = ${id}`);
 
-    newsModel.findOneAndUpdate(
-        { _id: id },
-        {
-            $set: {
-                title: request.body.title,
-                author: request.body.author,
-                category: request.body.category
+        newsModel.findOneAndUpdate(
+            { _id: id },
+            {
+                $set: {
+                    title: request.body.title,
+                    author: request.body.author,
+                    category: request.body.category
+                }
+            },
+            { upsert: true },
+            (err, news) => {
+                if (err) {
+                    response.send("Error", err);
+                } else {
+                    response.send(news);
+                }
             }
-        },
-        { upsert: true },
-        (err, news) => {
+        );
+    }
+);
+
+app.post(
+    "/login",
+    passport.authenticate("local", {
+        successRedirect: "/news",
+        failureRedirect: "/login",
+        session: false
+    })
+);
+
+app.post(
+    "/news",
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/login"
+    }),
+    function(request, response) {
+        console.log("BOOM");
+        logger.info(`URL: '/news', POST request`);
+
+        newsModel.create(request.body, (err, news) => {
+            if (err) {
+                response.send("Error", err);
+            } else {
+                console.log(news);
+                response.send(news);
+            }
+        });
+    }
+);
+
+app.delete(
+    "/news/:id",
+    passport.authenticate("local", {
+        successRedirect: "/news",
+        failureRedirect: "/login",
+
+        session: false
+    }),
+    function(request, response) {
+        const id = request.params.id;
+
+        logger.info(
+            `URL: '/news${id}', DELETE request with parameter id = ${id}`
+        );
+
+        newsModel.findOneAndDelete({ _id: id }, (err, news) => {
             if (err) {
                 response.send("Error", err);
             } else {
                 response.send(news);
             }
-        }
-    );
-});
-
-app.post("/news", function(request, response) {
-    logger.info(`URL: '/news', PUT request`);
-
-    newsModel.create(request.body, (err, news) => {
-        if (err) {
-            response.send("Error", err);
-        } else {
-            console.log(news);
-            response.send(news);
-        }
-    });
-});
-
-app.delete("/news/:id", function(request, response) {
-    const id = request.params.id;
-
-    logger.info(`URL: '/news${id}', DELETE request with parameter id = ${id}`);
-
-    newsModel.findOneAndDelete({ _id: id }, (err, news) => {
-        if (err) {
-            response.send("Error", err);
-        } else {
-            response.send(news);
-        }
-    });
-});
+        });
+    }
+);
 
 app.listen(3000);

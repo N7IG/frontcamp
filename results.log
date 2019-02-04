@@ -25,3 +25,27 @@
 {"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-04 00:02:21"}
 {"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-04 00:05:14"}
 {"message":"URL: '/news5c5751f19f3f4d338c7a4141', GET request with parameter id = 5c5751f19f3f4d338c7a4141","level":"info","timestamp":"2019-02-04 00:05:28"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 00:33:51"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 00:34:07"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 00:34:20"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 00:34:37"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 00:35:03"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 00:35:19"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 00:36:06"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 00:36:08"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 00:36:08"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 00:37:13"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 00:37:22"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 00:46:10"}
+{"message":"URL: '/news5c58afcf123f7e323820aa5e', GET request with parameter id = 5c58afcf123f7e323820aa5e","level":"info","timestamp":"2019-02-05 00:46:18"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 01:14:42"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 01:15:41"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 01:16:11"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 01:16:27"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 01:23:07"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 01:23:44"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 01:23:48"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 01:24:05"}
+{"message":"URL: '/news', PUT request","level":"info","timestamp":"2019-02-05 01:24:31"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 01:24:39"}
+{"message":"URL: '/news', GET request","level":"info","timestamp":"2019-02-05 01:26:26"}
