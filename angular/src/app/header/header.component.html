@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+    <img
+        [attr.src]="logoUrl"
+        [attr.alt]="logoUrl"
+        class="header-logo"
+        *ngIf="logoUrl"
+    />
+    <span>{{ title }}</span>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+
+    <button mat-flat-button>Log in</button>
+</mat-toolbar>

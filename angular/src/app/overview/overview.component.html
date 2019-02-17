@@ -1,0 +1,21 @@
+<source-name [sourceName]="sourceSelect$ | async"></source-name>
+<app-action-bar (source)="onSourceSelect($event)"></app-action-bar>
+<div class="article-container">
+    <ng-container *ngFor="let article of (article$ | async)">
+        <app-article
+            [title]="article.title"
+            [source]="article.source.name"
+            [date]="article.publishedAt | date"
+            [content]="article.content"
+            [imgUrl]="article.urlToImage"
+        ></app-article>
+    </ng-container>
+</div>
+<button
+    mat-button
+    *ngIf="pageCount > 1"
+    class="load-more-button"
+    (click)="onLoadMoreButtonClick()"
+>
+    LOAD MORE
+</button>

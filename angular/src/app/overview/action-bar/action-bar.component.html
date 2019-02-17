@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="action-bar">
+    <mat-form-field>
+        <mat-select
+            placeholder="Sources"
+            (selectionChange)="onSourceSelect($event)"
+        >
+            <mat-option
+                *ngFor="let source of (sources$ | async)"
+                [value]="source.id"
+            >
+                {{ source.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+</mat-toolbar>
