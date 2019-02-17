@@ -14,6 +14,9 @@ export class ActionBarComponent implements OnInit {
     public sources$: Observable<NewsSource[]>;
 
     @Output() source: EventEmitter<string> = new EventEmitter<string>();
+    @Output() createdByMeOnly: EventEmitter<boolean> = new EventEmitter<
+        boolean
+    >();
 
     constructor(private articleService: NewsApiService) {}
 
@@ -23,5 +26,9 @@ export class ActionBarComponent implements OnInit {
 
     onSourceSelect(event) {
         this.source.emit(event.value);
+    }
+
+    toggleCreatedByMe(event) {
+        this.createdByMeOnly.next(event.checked);
     }
 }

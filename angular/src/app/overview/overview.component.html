@@ -1,5 +1,8 @@
 <source-name [sourceName]="sourceSelect$ | async"></source-name>
-<app-action-bar (source)="onSourceSelect($event)"></app-action-bar>
+<app-action-bar
+    (source)="onSourceSelect($event)"
+    (createdByMeOnly)="toggleCreatedByMe($event)"
+></app-action-bar>
 <div class="article-container">
     <ng-container *ngFor="let article of (article$ | async)">
         <app-article

@@ -9,6 +9,7 @@ import { HeaderModule } from "./header/header.module";
 import { EditModule } from "./edit/edit.module";
 import { HttpClientModule } from "@angular/common/http";
 import { PreviewModule } from "./preview/preview.module";
+import { CreateModule } from "./create/create.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -20,7 +21,8 @@ import { PreviewModule } from "./preview/preview.module";
         HeaderModule,
         EditModule,
         PreviewModule,
-        HttpClientModule
+        HttpClientModule,
+        CreateModule
     ],
     providers: [HttpClientModule],
     bootstrap: [AppComponent]

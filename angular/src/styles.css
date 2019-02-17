@@ -1,14 +1,15 @@
-@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
 * {
-  font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
+    background: #fafafa;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }

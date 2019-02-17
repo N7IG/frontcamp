@@ -13,6 +13,13 @@
         </mat-select>
     </mat-form-field>
 
+    <mat-checkbox (change)="toggleCreatedByMe($event)"
+        >Only created by me</mat-checkbox
+    >
     <!-- This fills the remaining space of the current row -->
     <span class="example-fill-remaining-space"></span>
+
+    <button mat-flat-button>
+        <a [routerLink]="['/create']">Add article</a>
+    </button>
 </mat-toolbar>

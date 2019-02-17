@@ -1,3 +1,18 @@
 .action-bar {
     height: 6rem;
 }
+
+.example-fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+mat-checkbox {
+    margin-left: 5rem;
+}
+
+a {
+    outline: none;
+    color: #212121;
+    font-weight: 500;
+    text-decoration: none;
+}

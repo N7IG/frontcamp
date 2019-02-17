@@ -1,17 +1,11 @@
-import { merge, Observable, of, Subject, BehaviorSubject } from "rxjs";
-import {
-    map,
-    scan,
-    switchMap,
-    tap,
-    publishReplay,
-    refCount
-} from "rxjs/operators";
+import { Observable, Subject, BehaviorSubject } from "rxjs";
+import { map, scan, switchMap, tap } from "rxjs/operators";
 
 import { Component, OnInit } from "@angular/core";
 
 import { NewsArticle } from "../models/news-article.model";
 import { NewsApiService } from "../services/news-api.service";
+import { NodejsNewsService } from "../services/nodejs-news.service";
 
 @Component({
     selector: "app-overview",
@@ -22,11 +16,15 @@ export class OverviewComponent implements OnInit {
     private noImageUrl: string = "https://i.imgur.com/uxC2Z9b.png";
     private loadMore$: Subject<Event> = new BehaviorSubject<Event>(undefined);
     private sourceSelect$: Subject<string> = new Subject<string>();
+    private createdByMe$: Subject<boolean> = new Subject<boolean>();
     private pageCount: number = 1;
 
     public article$: Observable<NewsArticle[]>;
 
-    constructor(private articleService: NewsApiService) {}
+    constructor(
+        private articleService: NewsApiService,
+        private nodejsNewsService: NodejsNewsService
+    ) {}
 
     ngOnInit() {
         // tap(a => console.log("bebe", a)),
@@ -60,6 +58,11 @@ export class OverviewComponent implements OnInit {
 
     public onSourceSelect(source) {
         this.sourceSelect$.next(source);
+    }
+
+    public toggleCreatedByMe(byMe: boolean) {
+        this.createdByMe$.next(byMe);
+        this.nodejsNewsService.getArticles().subscribe();
     }
 
     private formatArticle(article: NewsArticle): NewsArticle {

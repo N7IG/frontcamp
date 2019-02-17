@@ -1,6 +1,12 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { MatSelectModule, MatToolbarModule } from "@angular/material";
+import { RouterModule } from "@angular/router";
+import {
+    MatSelectModule,
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatButtonModule
+} from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { ActionBarComponent } from "./action-bar.component";
@@ -11,7 +17,10 @@ import { ActionBarComponent } from "./action-bar.component";
         CommonModule,
         BrowserAnimationsModule,
         MatSelectModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        RouterModule
     ],
     exports: [ActionBarComponent]
 })

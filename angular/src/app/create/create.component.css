@@ -1,0 +1,14 @@
+mat-card {
+    margin: 50px 200px;
+}
+
+mat-form-field {
+    display: block;
+}
+
+a {
+    outline: none;
+    color: #212121;
+    font-weight: 500;
+    text-decoration: none;
+}
