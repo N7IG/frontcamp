@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { EventEmitter } from "@angular/core";
 import { NodejsNewsService } from "../services/nodejs-news.service";
 
@@ -10,10 +10,10 @@ import { NodejsNewsService } from "../services/nodejs-news.service";
 })
 export class CreateComponent implements OnInit {
     public newArticleForm = this.fb.group({
-        title: [""],
-        description: [""],
-        urlToImage: [""],
-        content: [""]
+        title: ["", [Validators.required]],
+        description: ["", [Validators.required]],
+        urlToImage: ["", [Validators.required]],
+        content: ["", [Validators.required]]
     });
 
     constructor(
