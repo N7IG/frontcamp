@@ -1,6 +1,9 @@
-import { Component, OnInit, Output } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { EventEmitter } from "@angular/core";
+import { switchMap } from "rxjs/operators";
+
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+
 import { NodejsNewsService } from "../services/nodejs-news.service";
 
 @Component({
@@ -9,19 +12,22 @@ import { NodejsNewsService } from "../services/nodejs-news.service";
     styleUrls: ["./create.component.css"]
 })
 export class CreateComponent implements OnInit {
-    public newArticleForm = this.fb.group({
-        title: ["", [Validators.required]],
-        description: ["", [Validators.required]],
-        urlToImage: ["", [Validators.required]],
-        content: ["", [Validators.required]]
-    });
+    public newArticleForm: FormGroup;
 
     constructor(
         private fb: FormBuilder,
-        private nodejsNewsService: NodejsNewsService
+        private nodejsNewsService: NodejsNewsService,
+        private router: Router
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.newArticleForm = this.fb.group({
+            title: ["", [Validators.required]],
+            description: ["", [Validators.required]],
+            urlToImage: ["", [Validators.required]],
+            content: ["", [Validators.required]]
+        });
+    }
 
     onSave() {
         const objectToSave = {
@@ -32,6 +38,9 @@ export class CreateComponent implements OnInit {
             content: this.newArticleForm.get("content").value
         };
 
-        this.nodejsNewsService.putArticle(objectToSave);
+        this.nodejsNewsService
+            .addArticle(objectToSave)
+            .pipe(switchMap(() => this.router.navigate(["/"])))
+            .subscribe();
     }
 }

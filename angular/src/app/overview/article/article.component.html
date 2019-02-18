@@ -8,8 +8,8 @@
     <mat-card-content>
         <p>{{ content }}</p>
     </mat-card-content>
-    <mat-card-actions *ngIf="isPresonal">
-        <button mat-button>EDIT</button>
-        <button mat-button>DELETE</button>
+    <mat-card-actions *ngIf="isPersonal">
+        <button mat-button><a [routerLink]="['/edit/' + id]">EDIT</a></button>
+        <button mat-button (click)="onDelete()">DELETE</button>
     </mat-card-actions>
 </mat-card>

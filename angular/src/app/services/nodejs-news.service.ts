@@ -1,12 +1,11 @@
 import { Observable } from "rxjs";
-import { map, tap } from "rxjs/operators";
 
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 import { GetEverythingResponse } from "../models/get-everything-response.model";
 import { NewsArticle } from "../models/news-article.model";
-import { PutArticleRequest } from "../models/put-article-request.model";
+import { LoginRequest } from "../models/login-request.model";
 
 @Injectable({
     providedIn: "root"
@@ -19,17 +18,49 @@ export class NodejsNewsService {
     public getArticles(): Observable<NewsArticle[]> {
         const endpoint = "news";
 
-        return this.http
-            .get<GetEverythingResponse>(this.urlBase + endpoint)
-            .pipe(
-                tap(response => console.log(response)),
-                map(response => response.articles)
-            );
+        return this.http.get<any>(this.urlBase + endpoint);
     }
 
-    public putArticle(request: PutArticleRequest): void {
+    public getArticle(id: string): Observable<NewsArticle[]> {
+        const endpoint = "news/" + id;
+
+        return this.http.get<any>(this.urlBase + endpoint);
+    }
+
+    public addArticle(request: any): Observable<any> {
+        const endpoint = "news";
+
+        request.publishedAt = new Date().toISOString();
+        request.source = {
+            name: "Me"
+        };
+
+        return this.http.post<any>(this.urlBase + endpoint, request);
+    }
+
+    public updateArticle(request: any): Observable<any> {
         const endpoint = "news/" + request.id;
 
-        this.http.put<GetEverythingResponse>(this.urlBase + endpoint, request);
+        request.publishedAt = new Date().toISOString();
+        request.source = {
+            name: "Me"
+        };
+
+        return this.http.put<any>(this.urlBase + endpoint, request);
+    }
+
+    public deleteArticle(id: string): Observable<any> {
+        const endpoint = "news/" + id;
+
+        return this.http.delete<any>(this.urlBase + endpoint);
+    }
+
+    public logIn(request: LoginRequest): Observable<any> {
+        const endpoint = "login";
+
+        return this.http.post<GetEverythingResponse>(
+            this.urlBase + endpoint,
+            request
+        );
     }
 }

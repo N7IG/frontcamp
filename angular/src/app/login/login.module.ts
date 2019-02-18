@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 import {
     MatButtonModule,
     MatCardModule,
@@ -8,13 +9,12 @@ import {
     MatOptionModule,
     MatSelectModule
 } from "@angular/material";
-
-import { EditComponent } from "./edit.component";
 import { RouterModule } from "@angular/router";
-import { ReactiveFormsModule } from "@angular/forms";
+
+import { LoginComponent } from "./login.component";
 
 @NgModule({
-    declarations: [EditComponent],
+    declarations: [LoginComponent],
     imports: [
         CommonModule,
         MatButtonModule,
@@ -26,6 +26,6 @@ import { ReactiveFormsModule } from "@angular/forms";
         RouterModule,
         ReactiveFormsModule
     ],
-    exports: [EditComponent]
+    exports: [LoginComponent]
 })
-export class EditModule {}
+export class LoginModule {}

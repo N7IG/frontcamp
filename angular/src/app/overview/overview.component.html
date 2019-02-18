@@ -6,11 +6,13 @@
 <div class="article-container">
     <ng-container *ngFor="let article of (article$ | async)">
         <app-article
-            [title]="article.title"
-            [source]="article.source.name"
-            [date]="article.publishedAt | date"
-            [content]="article.content"
-            [imgUrl]="article.urlToImage"
+            [title]="article?.title"
+            [id]="article?.id"
+            [source]="article?.source?.name"
+            [date]="article?.publishedAt | date"
+            [content]="article?.content"
+            [imgUrl]="article?.urlToImage"
+            [isPersonal]="nodeJs$ | async"
         ></app-article>
     </ng-container>
 </div>

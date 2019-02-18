@@ -10,6 +10,7 @@ import { EditModule } from "./edit/edit.module";
 import { HttpClientModule } from "@angular/common/http";
 import { PreviewModule } from "./preview/preview.module";
 import { CreateModule } from "./create/create.module";
+import { LoginModule } from "./login/login.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { CreateModule } from "./create/create.module";
         EditModule,
         PreviewModule,
         HttpClientModule,
-        CreateModule
+        CreateModule,
+        LoginModule
     ],
     providers: [HttpClientModule],
     bootstrap: [AppComponent]

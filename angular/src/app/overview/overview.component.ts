@@ -20,6 +20,8 @@ export class OverviewComponent implements OnInit {
     private pageCount: number = 1;
 
     public article$: Observable<NewsArticle[]>;
+    public newsApi$: Observable<NewsArticle[]>;
+    public nodeJs$: Observable<NewsArticle[]>;
 
     constructor(
         private articleService: NewsApiService,
@@ -27,9 +29,7 @@ export class OverviewComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        // tap(a => console.log("bebe", a)),
-
-        this.article$ = this.sourceSelect$.pipe(
+        this.newsApi$ = this.sourceSelect$.pipe(
             switchMap(source =>
                 this.loadMore$.pipe(
                     switchMap(() =>
@@ -49,10 +49,13 @@ export class OverviewComponent implements OnInit {
                 )
             )
         );
+
+        this.nodeJs$ = this.nodejsNewsService.getArticles();
+
+        this.article$ = this.nodeJs$;
     }
 
     public onLoadMoreButtonClick() {
-        console.log("MMM");
         this.loadMore$.next();
     }
 
@@ -61,8 +64,11 @@ export class OverviewComponent implements OnInit {
     }
 
     public toggleCreatedByMe(byMe: boolean) {
-        this.createdByMe$.next(byMe);
-        this.nodejsNewsService.getArticles().subscribe();
+        if (byMe) {
+            this.article$ = this.nodeJs$;
+        } else {
+            this.article$ = this.newsApi$;
+        }
     }
 
     private formatArticle(article: NewsArticle): NewsArticle {
