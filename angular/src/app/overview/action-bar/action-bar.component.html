@@ -16,6 +16,13 @@
     <mat-checkbox (change)="toggleCreatedByMe($event)" [checked]="true"
         >Only created by me</mat-checkbox
     >
+
+    <mat-form-field>
+        <input matInput [formControl]="filterField" placeholder="Filter" />
+    </mat-form-field>
+    <button mat-flat-button (click)="onFilter()">
+        Filter!
+    </button>
     <!-- This fills the remaining space of the current row -->
     <span class="example-fill-remaining-space"></span>
 

@@ -4,6 +4,7 @@ import { NewsSource } from "src/app/models/news-source.model";
 import { NewsApiService } from "src/app/services/news-api.service";
 
 import { Component, OnInit, Output } from "@angular/core";
+import { FormControl } from "@angular/forms";
 
 @Component({
     selector: "app-action-bar",
@@ -12,23 +13,30 @@ import { Component, OnInit, Output } from "@angular/core";
 })
 export class ActionBarComponent implements OnInit {
     public sources$: Observable<NewsSource[]>;
+    public filterField: FormControl;
 
     @Output() source: EventEmitter<string> = new EventEmitter<string>();
+    @Output() filter: EventEmitter<string> = new EventEmitter<string>();
     @Output() createdByMeOnly: EventEmitter<boolean> = new EventEmitter<
         boolean
     >();
 
     constructor(private articleService: NewsApiService) {}
 
-    ngOnInit() {
+    public ngOnInit() {
         this.sources$ = this.articleService.getSources();
+        this.filterField = new FormControl("");
     }
 
-    onSourceSelect(event) {
+    public onSourceSelect(event) {
         this.source.emit(event.value);
     }
 
-    toggleCreatedByMe(event) {
+    public toggleCreatedByMe(event) {
         this.createdByMeOnly.next(event.checked);
+    }
+
+    public onFilter() {
+        this.filter.next(this.filterField.value);
     }
 }

@@ -16,19 +16,19 @@ export class OverviewComponent implements OnInit {
     private noImageUrl: string = "https://i.imgur.com/uxC2Z9b.png";
     private loadMore$: Subject<Event> = new BehaviorSubject<Event>(undefined);
     private sourceSelect$: Subject<string> = new Subject<string>();
-    private createdByMe$: Subject<boolean> = new Subject<boolean>();
     private pageCount: number = 1;
 
     public article$: Observable<NewsArticle[]>;
     public newsApi$: Observable<NewsArticle[]>;
     public nodeJs$: Observable<NewsArticle[]>;
+    public filterString: string;
 
     constructor(
         private articleService: NewsApiService,
         private nodejsNewsService: NodejsNewsService
     ) {}
 
-    ngOnInit() {
+    public ngOnInit() {
         this.newsApi$ = this.sourceSelect$.pipe(
             switchMap(source =>
                 this.loadMore$.pipe(
@@ -69,6 +69,10 @@ export class OverviewComponent implements OnInit {
         } else {
             this.article$ = this.newsApi$;
         }
+    }
+
+    public setFilterString(filterString: string) {
+        this.filterString = filterString;
     }
 
     private formatArticle(article: NewsArticle): NewsArticle {

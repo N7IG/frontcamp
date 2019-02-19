@@ -1,15 +1,18 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
 import {
-    MatSelectModule,
-    MatToolbarModule,
+    MatButtonModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatToolbarModule
 } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { RouterModule } from "@angular/router";
 
 import { ActionBarComponent } from "./action-bar.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [ActionBarComponent],
@@ -20,6 +23,9 @@ import { ActionBarComponent } from "./action-bar.component";
         MatToolbarModule,
         MatCheckboxModule,
         MatButtonModule,
+        MatInputModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
         RouterModule
     ],
     exports: [ActionBarComponent]

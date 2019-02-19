@@ -2,9 +2,12 @@
 <app-action-bar
     (source)="onSourceSelect($event)"
     (createdByMeOnly)="toggleCreatedByMe($event)"
+    (filter)="setFilterString($event)"
 ></app-action-bar>
 <div class="article-container">
-    <ng-container *ngFor="let article of (article$ | async)">
+    <ng-container
+        *ngFor="let article of (article$ | async | titleFilter: filterString)"
+    >
         <app-article
             [title]="article?.title"
             [id]="article?.id"
