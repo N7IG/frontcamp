@@ -1,4 +1,4 @@
-import { Observable, Subject, BehaviorSubject } from "rxjs";
+import { Observable, Subject, BehaviorSubject, ReplaySubject } from "rxjs";
 import { map, scan, switchMap, tap } from "rxjs/operators";
 
 import { Component, OnInit } from "@angular/core";
@@ -15,7 +15,7 @@ import { NodejsNewsService } from "../services/nodejs-news.service";
 export class OverviewComponent implements OnInit {
     private noImageUrl: string = "https://i.imgur.com/uxC2Z9b.png";
     private loadMore$: Subject<Event> = new BehaviorSubject<Event>(undefined);
-    private sourceSelect$: Subject<string> = new Subject<string>();
+    private sourceSelect$: Subject<string> = new ReplaySubject<string>(1);
     private pageCount: number = 1;
 
     public article$: Observable<NewsArticle[]>;

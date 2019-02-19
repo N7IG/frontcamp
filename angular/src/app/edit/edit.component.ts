@@ -31,10 +31,7 @@ export class EditComponent implements OnInit {
 
         this.nodejsNewsService
             .getArticle(id)
-            .pipe(
-                tap(a => console.log("LLL", a)),
-                tap(response => this.fillFields(response))
-            )
+            .pipe(tap(response => this.fillFields(response)))
             .subscribe();
     }
 
