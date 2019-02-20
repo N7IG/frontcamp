@@ -1,12 +1,24 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { NodejsNewsService } from './nodejs-news.service';
+import { NodejsNewsService } from "./nodejs-news.service";
+import { HttpClient } from "@angular/common/http";
 
-describe('NodejsNewsService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+const httpClientMock: any = jasmine.createSpyObj("HttpClient", ["get"]);
 
-  it('should be created', () => {
-    const service: NodejsNewsService = TestBed.get(NodejsNewsService);
-    expect(service).toBeTruthy();
-  });
+describe("NodejsNewsService", () => {
+    beforeEach(() =>
+        TestBed.configureTestingModule({
+            providers: [
+                {
+                    provide: HttpClient,
+                    useValue: httpClientMock
+                }
+            ]
+        })
+    );
+
+    it("should be created", () => {
+        const service: NodejsNewsService = TestBed.get(NodejsNewsService);
+        expect(service).toBeTruthy();
+    });
 });

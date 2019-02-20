@@ -1,25 +1,38 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NewsApiService } from "src/app/services/news-api.service";
 
-import { ActionBarComponent } from './action-bar.component';
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-describe('ActionBarComponent', () => {
-  let component: ActionBarComponent;
-  let fixture: ComponentFixture<ActionBarComponent>;
+import { ActionBarComponent } from "./action-bar.component";
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ActionBarComponent ]
-    })
-    .compileComponents();
-  }));
+const newsApiServiceMock: any = jasmine.createSpyObj("NewsApiService", [
+    "getSources"
+]);
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ActionBarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe("ActionBarComponent", () => {
+    let component: ActionBarComponent;
+    let fixture: ComponentFixture<ActionBarComponent>;
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ActionBarComponent],
+            schemas: [NO_ERRORS_SCHEMA],
+            providers: [
+                {
+                    provide: NewsApiService,
+                    useValue: newsApiServiceMock
+                }
+            ]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ActionBarComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

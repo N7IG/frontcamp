@@ -8,7 +8,6 @@ import { FooterModule } from "./footer/footer.module";
 import { HeaderModule } from "./header/header.module";
 import { EditModule } from "./edit/edit.module";
 import { HttpClientModule } from "@angular/common/http";
-import { PreviewModule } from "./preview/preview.module";
 import { CreateModule } from "./create/create.module";
 import { LoginModule } from "./login/login.module";
 
@@ -21,7 +20,6 @@ import { LoginModule } from "./login/login.module";
         FooterModule,
         HeaderModule,
         EditModule,
-        PreviewModule,
         HttpClientModule,
         CreateModule,
         LoginModule

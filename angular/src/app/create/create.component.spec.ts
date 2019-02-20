@@ -1,25 +1,64 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
+import {
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule
+} from "@angular/material";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { Router } from "@angular/router";
 
-import { CreateComponent } from './create.component';
+import { NodejsNewsService } from "../services/nodejs-news.service";
+import { CreateComponent } from "./create.component";
 
-describe('CreateComponent', () => {
-  let component: CreateComponent;
-  let fixture: ComponentFixture<CreateComponent>;
+const routerMock: any = jasmine.createSpyObj("Router", ["navigate"]);
+const nodejsNewsServiceMock: any = jasmine.createSpyObj("NodejsNewsService", [
+    "addArticle"
+]);
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CreateComponent ]
-    })
-    .compileComponents();
-  }));
+describe("CreateComponent", () => {
+    let component: CreateComponent;
+    let fixture: ComponentFixture<CreateComponent>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CreateComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [CreateComponent],
+            imports: [
+                BrowserAnimationsModule,
+                MatButtonModule,
+                MatCardModule,
+                MatFormFieldModule,
+                MatOptionModule,
+                MatSelectModule,
+                MatInputModule,
+                ReactiveFormsModule
+            ],
+            schemas: [NO_ERRORS_SCHEMA],
+            providers: [
+                FormBuilder,
+                {
+                    provide: Router,
+                    useValue: routerMock
+                },
+                {
+                    provide: NodejsNewsService,
+                    useValue: nodejsNewsServiceMock
+                }
+            ]
+        }).compileComponents();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(CreateComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

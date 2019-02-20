@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { NodejsNewsService } from "../services/nodejs-news.service";
 import { Router } from "@angular/router";
-import { switchMap, tap } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
 
 @Component({
     selector: "app-login",
