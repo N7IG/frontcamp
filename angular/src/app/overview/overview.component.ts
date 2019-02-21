@@ -75,7 +75,7 @@ export class OverviewComponent implements OnInit {
         this.filterString = filterString;
     }
 
-    private formatArticle(article: NewsArticle): NewsArticle {
+    public formatArticle(article: NewsArticle): NewsArticle {
         return {
             source: {
                 id: article.source.id,
